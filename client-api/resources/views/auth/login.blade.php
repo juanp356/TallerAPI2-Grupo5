@@ -32,7 +32,7 @@
                                     <form class="user" action="{{ route('auth.login') }}" method="POST">
                                         @csrf
                                         <div class="form-group">
-                                            <input type="email" name="email" id="email" class="form-control form-control-user" placeholder="Correo electrónico" value="{{ old('email') }}">
+                                            <input type="text" name="username" id="username" class="form-control form-control-user" placeholder="Usuario" value="{{ old('username') }}">
                                         </div>
                                         <div class="form-group">
                                             <input type="password" name="password" id="password" class="form-control form-control-user" placeholder="Contraseña">
