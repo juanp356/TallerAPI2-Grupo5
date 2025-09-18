@@ -39,8 +39,8 @@
                 </a>
                 <div id="collapse1" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="{{ route('order.index') }}">Consultar</a>
-                        <a class="collapse-item" href="{{ route('order.create') }}">Crear</a>
+                        <a class="collapse-item" href="#">Consultar</a>
+                        <a class="collapse-item" href="#">Crear</a>
                     </div>
                 </div>
             </li>
@@ -55,8 +55,8 @@
                 </a>
                 <div id="collapse2" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="{{ route('causal.index') }}">Consultar</a>
-                        <a class="collapse-item" href="{{ route('causal.create') }}">Crear</a>
+                        <a class="collapse-item" href="#">Consultar</a>
+                        <a class="collapse-item" href="#">Crear</a>
                     </div>
                 </div>
             </li>
@@ -70,8 +70,8 @@
                 </a>
                 <div id="collapse3" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="{{ route('observation.index') }}">Consultar</a>
-                        <a class="collapse-item" href=" {{ route('observation.create') }}">Crear</a>
+                        <a class="collapse-item" href="#">Consultar</a>
+                        <a class="collapse-item" href="#">Crear</a>
                     </div>
                 </div>
             </li>
@@ -95,8 +95,8 @@
                 </a>
                 <div id="collapse4" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="{{ route('activity.index') }}">Consultar</a>
-                        <a class="collapse-item" href="{{ route('activity.create') }}">Crear</a>
+                        <a class="collapse-item" href="#">Consultar</a>
+                        <a class="collapse-item" href="#">Crear</a>
                     </div>
                 </div>
             </li>
@@ -111,8 +111,8 @@
                 </a>
                 <div id="collapse5" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="{{ route('typeactivity.index') }}">Consultar</a>
-                        <a class="collapse-item" href="{{ route('typeactivity.create') }}">Crear</a>
+                        <a class="collapse-item" href="#">Consultar</a>
+                        <a class="collapse-item" href="#">Crear</a>
                     </div>
                 </div>
             </li>
@@ -135,8 +135,8 @@
                 </a>
                 <div id="collapse6" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="{{ route('technician.index') }}">Consultar</a>
-                        <a class="collapse-item" href="{{ route('technician.create') }}">Crear</a>
+                        <a class="collapse-item" href="#">Consultar</a>
+                        <a class="collapse-item" href="#">Crear</a>
                     </div>
                 </div>
             </li>
@@ -156,7 +156,7 @@
                 </a>
                 <div id="collapse7" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="{{ route('reports.index') }}">Consultar</a>
+                        <a class="collapse-item" href="#">Consultar</a>
                     </div>
                 </div>
             </li>
@@ -168,7 +168,7 @@
                 </a>
                 <div id="collapse8" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="{{ route('users.index') }}">Envió de correo</a>
+                        <a class="collapse-item" href="#">Envió de correo</a>
                     </div>
                 </div>
             </li>

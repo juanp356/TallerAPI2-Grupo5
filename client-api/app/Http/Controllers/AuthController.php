@@ -14,7 +14,11 @@ class AuthController extends Controller
      */
     public function index()
     {
-        //
+        if(Session::has('token'))
+        {
+            return redirect()->route('index');
+        }
+        return view('auth.login');
     }
 
     /**

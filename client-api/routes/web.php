@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -14,25 +15,24 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('auth.login');
-})->name('login');
 
-Route::post('/login', function (Request $request) {
-    // Solo para probar, luego aquí irá tu lógica de login
-    return 'Formulario enviado con email: ' . $request->email;
-})->name('auth.login');
+Route::get('/index', function () {
+    return view('index');
+})->name('index');
 
 
-// Vista de registro
-Route::get('/register', function () {
-    return view('auth.register');
-})->name('auth.register');
+Route::prefix('auth')->group(function(){
+    Route::get('/index', [AuthController::class,'index']) ->name('auth.index');
+    Route::post('/login', [AuthController::class,'login']) ->name('auth.login');
+     Route::get('/register', [AuthController::class,'create']) ->name('auth.register');
+     Route::post('/register', [AuthController::class,'store']) ->name('auth.store');
+    
 
-// Acción de registro (POST)
-Route::post('/register', function (Request $request) {
-    return 'Registro enviado con email: ' . $request->email;
-})->name('auth.register.submit');
+});
+Route::prefix('auth')->group(function(){
+  Route::get('/logout', [AuthController::class,'logout']) ->name('auth.logout');
+
+});
 
 
 
