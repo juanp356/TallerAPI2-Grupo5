@@ -19,7 +19,7 @@
                     <div class="card-body p-0">
                         <div class="row">
                             <div class="col-lg-6">
-                                <img src="{{ asset('img/work_order_logo.jpg') }}" alt="login" class="img-fluid">
+                                <img src="{{ asset('img/imageAPI.png') }}" alt="login" class="img-fluid">
                             </div>
                             <div class="col-lg-6">
                                 <div class="p-5">
