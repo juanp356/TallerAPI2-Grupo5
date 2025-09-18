@@ -54,7 +54,7 @@ class AuthController extends Controller
      */
     public function login(Request $request)
     {
-        $url = env('API_BASE_URL', "http://localhost:8000");
+        $url = env('API_BASE_URL', "https://dummyjson.com");
         $response = Http::acceptJson()->post($url . '/auth/login', [
             'email' => $request->email,
             'password' => $request->password
@@ -83,7 +83,7 @@ class AuthController extends Controller
         if(Session::has('token'))
         {
             $token = Session::get('token');
-            $url = env('API_BASE_URL', "http://localhost:8000");
+            $url = env('API_BASE_URL', "https://dummyjson.com");
             $response = Http::acceptJson()->withToken($token)->post($url . '/auth/logout');
             if($response->status() == Response::HTTP_OK)
             {
