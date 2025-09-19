@@ -14,8 +14,7 @@ class AuthController extends Controller
      */
     public function index()
     {
-        if(Session::has('token'))
-        {
+        if (Session::has('token')) {
             return redirect()->route('index');
         }
         return view('auth.login');
@@ -54,52 +53,38 @@ class AuthController extends Controller
     }
 
     /**
-     * Login users
+     * Login 
      */
     public function login(Request $request)
     {
         $url = env('API_BASE_URL', "https://dummyjson.com");
-        $response = Http::acceptJson()->post($url . '/auth/login', [
-            'email' => $request->email,
-            'password' => $request->password
-        ]);
+        $payload = [
+            'username' => $request->username,
+            'password' => $request->password,
+        ];
+        $response = Http::post($url . '/auth/login', $payload);
 
-        if($response->status() == Response::HTTP_OK)
-        {
-            $jsonResponse = json_decode($response);
-            Session::put('user', $jsonResponse->user);
-            Session::put('token', $jsonResponse->token);
-            return redirect()->route('index');
-        }
-        else
-        {
+        if ($response->status() == Response::HTTP_OK) {
+            $jsonResponse = $response->json();
+            Session::put('user', $jsonResponse['username']);
+            Session::put('token', $jsonResponse['accessToken']);
+            return redirect()->route('index'); 
+        } else {
             return back()->withErrors([
-                'email' => 'Credenciales incorrectas'
-            ])->onlyInput('email');
+                'username' => 'Credenciales incorrectas'
+            ])->onlyInput('username');
         }
     }
 
     /**
-     * Logout users
+     * Logout 
      */
     public function logout(Request $request)
     {
-        if(Session::has('token'))
-        {
-            $token = Session::get('token');
-            $url = env('API_BASE_URL', "https://dummyjson.com");
-            $response = Http::acceptJson()->withToken($token)->post($url . '/auth/logout');
-            if($response->status() == Response::HTTP_OK)
-            {
-                Session::flush();
-                $request->sesion()->invalidate();
-                return redirect()->route('auth.index');
-            }
-        }
-        else
-        {
-            session()->flash('warning', 'No has iniciado sesion');
-            return view('auth.index');
-        }
+        Session::flush();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+
+        return redirect()->route('auth.index')->with('message', 'Sesión cerrada correctamente');
     }
 }

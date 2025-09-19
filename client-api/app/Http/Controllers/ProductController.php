@@ -55,6 +55,7 @@ class ProductController extends Controller
       Al crear un nuevo producto. (Testearla para saber como funciona)
 
       IMAGE URL PARA CREAR UN PRODUCTO DE PRUEBA: https://i.dummyjson.com/data/products/1/1.jpg
+      Si quiere testearlo descomente la línea.
     */
     //dd($response->json());
 
@@ -108,7 +109,7 @@ class ProductController extends Controller
     if ($response->successful()) {
       /*
       Lo mismo que en el método store, para ver la respuesta y actualización
-      del producto en formato JSON.
+      del producto en formato JSON. Si quiere testearlo descomente la línea.
       */
       //dd($response->json());
       session()->flash('message', 'Producto actualizado exitosamente');
@@ -126,26 +127,27 @@ class ProductController extends Controller
    * Remove the specified resource from storage.
    */
   public function destroy(string $id)
-{
+  {
     $url = env('URL_BASE_API', "https://dummyjson.com");
 
     $response = Http::acceptJson()
-        ->withToken(Session::get('token'))
-        ->delete($url . '/products/' . $id);
+      ->withToken(Session::get('token'))
+      ->delete($url . '/products/' . $id);
 
     if ($response->successful()) {
-        //ver la respuesta del API
-        dd($response->json());
+      /*ver la respuesta del API
+        Si quiere testearlo descomente la línea.
+        */
+      //dd($response->json());
 
-        session()->flash('message', 'Producto eliminado exitosamente');
-        return redirect()->route('product.index');
+      session()->flash('message', 'Producto eliminado exitosamente');
+      return redirect()->route('product.index');
     } elseif ($response->status() == Response::HTTP_BAD_REQUEST) {
-        $errors = $response->json()['errors'] ?? ['No se pudo eliminar el producto'];
-        return redirect()->route('product.index')
-            ->withErrors($errors);
+      $errors = $response->json()['errors'] ?? ['No se pudo eliminar el producto'];
+      return redirect()->route('product.index')
+        ->withErrors($errors);
     } else {
-        abort($response->status());
+      abort($response->status());
     }
-}
-
+  }
 }

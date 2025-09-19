@@ -43,6 +43,10 @@
                                     <div class="text-center">
                                         <a href="{{ route('auth.register') }}">Registrarse</a>
                                     </div>
+                                    <br>
+                                    <span class="text-center">Para pruebas de la API, puede usar las siguientes credenciales:</span><br>
+                                    <span class="text-center">Usuario: emilys</span><br>
+                                    <span class="text-center">Contraseña: emilyspass</span>
                                 </div>
                             </div>
                         </div>
