@@ -18,6 +18,8 @@
                     <tr>
                         <th>ID</th>
                         <th>Category</th>
+                        <th>Price</th>
+                        <th>Stock</th>
                         <th>Acciones</th>
                     </tr>
                 </thead>
@@ -25,10 +27,18 @@
                     @foreach ($products as $product)
                         <tr>
                             <td>{{ $product['id'] }}</td>
-                            <td>{{ $product['description'] }}</td>
+                            <td>{{ $product['category'] }}</td>
+                            <td>{{ $product['price'] }}</td>
+                            <td>{{ $product['stock'] }}</td>
                             <td>
                                 <a href="{{ route('product.edit', $product['id']) }}" class="btn btn-primary">Editar</a>
-                                <a href="{{ route('product.destroy', $product['id']) }}" class="btn btn-danger">Eliminar</a>
+                                <form action="{{ route('product.destroy', $product['id']) }}" method="POST" style="display:inline">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-danger" onclick="return confirm('¿Estás seguro de eliminar este producto?')">
+                                        Eliminar
+                                    </button>
+                                </form>
                             </td>
                         </tr>
                     @endforeach

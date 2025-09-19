@@ -18,7 +18,6 @@ class ProductController extends Controller
     $response = Http::acceptJson()->withToken(Session::get('token'))->get($url . '/products');
 
     if ($response->successful()) {
-      // Aquí seleccionamos SOLO la lista de productos
       $products = $response->json()['products'];
 
       return view('product.index', compact('products'));
@@ -39,11 +38,11 @@ class ProductController extends Controller
   /**
    * Store a newly created resource in storage.
    */
-  public function store(Request $request, string $id)
+  public function store(Request $request)
   {
     $url = env('URL_BASE_API', "https://dummyjson.com");
-    $response = Http::acceptJson()->withToken(Session::get('token'))->post($url . '/products/' . $id, [
-      'id' => $request->id,
+
+    $response = Http::acceptJson()->withToken(Session::get('token'))->post($url . '/products/add', [
       'title' => $request->title,
       'description' => $request->description,
       'price' => $request->price,
@@ -51,13 +50,20 @@ class ProductController extends Controller
       'images' => $request->images
     ]);
 
+    /*
+      Está linea de abajo es para que se vea la respuesta de la API en formato JSON
+      Al crear un nuevo producto. (Testearla para saber como funciona)
+
+      IMAGE URL PARA CREAR UN PRODUCTO DE PRUEBA: https://i.dummyjson.com/data/products/1/1.jpg
+    */
+    //dd($response->json());
+
     if ($response->successful()) {
-      session()->flash('message', 'Registro creado exitosamente');
+      session()->flash('message', 'Producto creado exitosamente');
       return redirect()->route('product.index');
     } elseif ($response->status() == Response::HTTP_BAD_REQUEST) {
       $errors = $response->json()['errors'];
-      return redirect()->route('product.create')
-        ->withInput()->withErrors($errors);
+      return redirect()->route('product.create')->withInput()->withErrors($errors);
     } else {
       abort($response->status());
     }
@@ -94,16 +100,22 @@ class ProductController extends Controller
       'title' => $request->title,
       'description' => $request->description,
       'price' => $request->price,
+      'category' => $request->category,
       'stock' => $request->stock,
-      'images' => $request->images
+      'images' => [$request->images],
     ]);
 
     if ($response->successful()) {
-      session()->flash('message', 'Registro actualizado exitosamente');
+      /*
+      Lo mismo que en el método store, para ver la respuesta y actualización
+      del producto en formato JSON.
+      */
+      //dd($response->json());
+      session()->flash('message', 'Producto actualizado exitosamente');
       return redirect()->route('product.index');
     } elseif ($response->status() == Response::HTTP_BAD_REQUEST) {
       $errors = $response->json()['errors'];
-      return redirect()->route('product.edit')
+      return redirect()->route('product.edit', $id)
         ->withInput()->withErrors($errors);
     } else {
       abort($response->status());
@@ -114,19 +126,26 @@ class ProductController extends Controller
    * Remove the specified resource from storage.
    */
   public function destroy(string $id)
-  {
+{
     $url = env('URL_BASE_API', "https://dummyjson.com");
-    $response = Http::acceptJson()->withToken(Session::get('token'))->delete($url . '/products/' . $id);
+
+    $response = Http::acceptJson()
+        ->withToken(Session::get('token'))
+        ->delete($url . '/products/' . $id);
 
     if ($response->successful()) {
-      session()->flash('message', 'Registro eliminado exitosamente');
-      return redirect()->route('product.index');
+        //ver la respuesta del API
+        dd($response->json());
+
+        session()->flash('message', 'Producto eliminado exitosamente');
+        return redirect()->route('product.index');
     } elseif ($response->status() == Response::HTTP_BAD_REQUEST) {
-      $errors = $response->json()['errors'];
-      return redirect()->route('product.index')
-        ->withInput()->withErrors($errors);
+        $errors = $response->json()['errors'] ?? ['No se pudo eliminar el producto'];
+        return redirect()->route('product.index')
+            ->withErrors($errors);
     } else {
-      abort($response->status());
+        abort($response->status());
     }
-  }
+}
+
 }
